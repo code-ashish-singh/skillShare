@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Zap, Twitter, Linkedin, Github, Mail } from "lucide-react";
+import { Zap, Mail, Globe, Rss, Users, ExternalLink } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -13,7 +13,7 @@ export default function Footer() {
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed">The marketplace connecting talented skill providers with seekers who need expert help.</p>
             <div className="flex gap-3 mt-5">
-              {[Twitter, Linkedin, Github, Mail].map((Icon, i) => (
+              {[Globe, Rss, Users, Mail].map((Icon, i) => (
                 <a key={i} href="#" className="w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors"><Icon size={16} /></a>
               ))}
             </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { Camera, Save, User, Mail, Phone, MapPin, Globe, Twitter, Linkedin, Github, Plus, X } from "lucide-react";
+import { Camera, Save, User, Mail, Phone, MapPin, Globe, Link2, Plus, X } from "lucide-react";
 
 export default function ProviderProfile() {
   const { user, updateUser } = useAuth();
@@ -91,7 +91,7 @@ export default function ProviderProfile() {
         <div className="card">
           <h3 className="font-semibold text-gray-800 mb-4">Social Links</h3>
           <div className="space-y-3">
-            {[{ k: "website", icon: Globe, ph: "https://yourwebsite.com" }, { k: "twitter", icon: Twitter, ph: "https://twitter.com/username" }, { k: "linkedin", icon: Linkedin, ph: "https://linkedin.com/in/username" }, { k: "github", icon: Github, ph: "https://github.com/username" }].map(({ k, icon: Icon, ph }) => (
+            {[{ k: "website", icon: Globe, ph: "https://yourwebsite.com" }, { k: "twitter", icon: Link2, ph: "https://twitter.com/username" }, { k: "linkedin", icon: Link2, ph: "https://linkedin.com/in/username" }, { k: "github", icon: Link2, ph: "https://github.com/username" }].map(({ k, icon: Icon, ph }) => (
               <div key={k} className="relative">
                 <Icon size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input value={form[k]} onChange={e => set(k, e.target.value)} placeholder={ph} className="input pl-10" />
