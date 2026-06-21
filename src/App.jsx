@@ -9,6 +9,7 @@ import HomePage from "./pages/public/HomePage";
 import ExplorePage from "./pages/public/ExplorePage";
 import ProviderDetailsPage from "./pages/public/ProviderDetailsPage";
 import BlogsPage from "./pages/public/BlogsPage";
+import BlogDetailPage from "./pages/public/BlogDetailPage";
 import LoginPage from "./pages/public/LoginPage";
 import SignupPage from "./pages/public/SignupPage";
 
@@ -35,6 +36,7 @@ export default function App() {
             <Route path="/explore" element={<ExplorePage />} />
             <Route path="/provider/:id" element={<ProviderDetailsPage />} />
             <Route path="/blogs" element={<BlogsPage />} />
+            <Route path="/blogs/:id" element={<BlogDetailPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
 

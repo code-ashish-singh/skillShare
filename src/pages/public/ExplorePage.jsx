@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Search, SlidersHorizontal, Grid3X3, List, Loader } from "lucide-react";
 import { providerService } from "../../services/api";
-import ProviderCard from "../../components/common/ProviderCard";
+import SkillCard from "../../components/common/SkillCard";
 
 const CATEGORIES = [
   "All", "Web Development", "Mobile Development", "UI/UX Design",
@@ -33,11 +33,11 @@ export default function ExplorePage() {
       if (category !== "All") params.category = category;
       if (minRating > 0) params.minRating = minRating;
 
-      const res = await providerService.getAll(params);
+      const res = await providerService.getSkills(params);
       setProviders(res.data.data);
       setPagination(res.data.pagination);
     } catch {
-      setError("Failed to load providers. Please try again.");
+      setError("Failed to load skills. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -62,8 +62,8 @@ export default function ExplorePage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Explore Skill Providers</h1>
-        <p className="text-gray-500">{loading ? "Loading..." : `${pagination.total} professionals available`}</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Explore Skills</h1>
+        <p className="text-gray-500">{loading ? "Loading..." : `${pagination.total} skills available`}</p>
       </div>
 
       {/* Search & Controls */}
@@ -73,7 +73,7 @@ export default function ExplorePage() {
           <input
             value={search}
             onChange={e => setSearch(e.target.value)}
-            placeholder="Search by name or skill..."
+            placeholder="Search skills, tags..."
             className="input pl-11 h-11"
           />
         </div>
@@ -130,11 +130,11 @@ export default function ExplorePage() {
         </div>
       ) : view === "grid" ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {providers.map(p => <ProviderCard key={p._id} provider={p} view="grid" />)}
+          {providers.map(s => <SkillCard key={s._id} skill={s} view="grid" />)}
         </div>
       ) : (
         <div className="flex flex-col gap-4">
-          {providers.map(p => <ProviderCard key={p._id} provider={p} view="list" />)}
+          {providers.map(s => <SkillCard key={s._id} skill={s} view="list" />)}
         </div>
       )}
 

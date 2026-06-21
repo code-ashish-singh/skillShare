@@ -2,11 +2,21 @@ import { Link } from "react-router-dom";
 import { Clock, ArrowRight } from "lucide-react";
 
 export default function BlogCard({ blog }) {
-  const { id, title, image, category, author, date, readTime, excerpt } = blog;
+  const title = blog.title;
+  const image = blog.coverImage || blog.image;
+  const category = blog.category;
+  const author = blog.author?.name || blog.author || "Admin";
+  const date = blog.createdAt || blog.date;
+  const readTime = blog.readTime || "5 min";
+  const excerpt = blog.excerpt;
+
   return (
     <div className="card p-0 overflow-hidden hover:shadow-lg transition-all duration-200 group">
-      <div className="overflow-hidden h-44">
-        <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+      <div className="overflow-hidden h-44 bg-gray-100">
+        {image
+          ? <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          : <div className="w-full h-full flex items-center justify-center text-gray-300 text-5xl">📝</div>
+        }
       </div>
       <div className="p-5">
         <span className="badge bg-primary-50 text-primary mb-2">{category}</span>
@@ -17,7 +27,7 @@ export default function BlogCard({ blog }) {
             <Clock size={12} />
             <span>{readTime} read</span>
           </div>
-          <Link to={`/blogs`} className="text-sm font-semibold text-primary flex items-center gap-1 hover:gap-2 transition-all">
+          <Link to={`/blogs/${blog._id}`} className="text-sm font-semibold text-primary flex items-center gap-1 hover:gap-2 transition-all">
             Read More <ArrowRight size={13} />
           </Link>
         </div>

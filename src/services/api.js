@@ -14,8 +14,15 @@ api.interceptors.response.use(
 export const providerService = {
   getAll: (params) => api.get("/users/providers", { params }),
   getById: (id) => api.get(`/users/providers/${id}`),
-  getSkills: () => api.get("/providers/skills"),
+  getSkills: (params) => api.get("/providers/skills", { params }),
   getSkillById: (id) => api.get(`/providers/skills/${id}`),
+  getMySkills: () => api.get("/providers/my-skills"),
+  createSkill: (data) => api.post("/providers/skills", data),
+  updateSkill: (id, data) => api.put(`/providers/skills/${id}`, data),
+  deleteSkill: (id) => api.delete(`/providers/skills/${id}`),
+  createPlan: (skillId, data) => api.post(`/providers/skills/${skillId}/plans`, data),
+  updatePlan: (id, data) => api.put(`/providers/plans/${id}`, data),
+  deletePlan: (id) => api.delete(`/providers/plans/${id}`),
 };
 
 export const bookingService = {

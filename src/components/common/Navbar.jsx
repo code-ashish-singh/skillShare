@@ -28,7 +28,7 @@ export default function Navbar() {
     { to: "/blogs", label: "Blogs" },
   ];
 
-  const links = !isAuthenticated ? publicLinks : user?.role === "seeker" ? seekerLinks : providerLinks;
+  const links = !isAuthenticated ? publicLinks : user?.role === "skillSeeker" ? seekerLinks : user?.role === "skillProvider" ? providerLinks : publicLinks;
 
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm">
@@ -64,7 +64,7 @@ export default function Navbar() {
             ) : (
               <div className="relative">
                 <button onClick={() => setProfileOpen(!profileOpen)} className="flex items-center gap-2 p-1 rounded-xl hover:bg-gray-100 transition-all">
-                  <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" />
+                  <img src={user.avatar || "https://i.pravatar.cc/150"} alt={user.name} className="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" />
                   <span className="text-sm font-medium text-gray-700">{user.name.split(" ")[0]}</span>
                 </button>
                 {profileOpen && (
@@ -73,10 +73,10 @@ export default function Navbar() {
                       <p className="text-sm font-semibold text-gray-800">{user.name}</p>
                       <p className="text-xs text-gray-400 capitalize">{user.role}</p>
                     </div>
-                    <Link to={user.role === "seeker" ? "/seeker/profile" : "/provider/profile"} onClick={() => setProfileOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-all">
+                    <Link to={user.role === "skillSeeker" ? "/seeker/profile" : "/provider/profile"} onClick={() => setProfileOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-all">
                       <User size={14} /> Profile
                     </Link>
-                    {user.role === "seeker" && (
+                    {user.role === "skillSeeker" && (
                       <Link to="/seeker/reviews" onClick={() => setProfileOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-all">
                         <Star size={14} /> My Reviews
                       </Link>

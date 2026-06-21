@@ -30,16 +30,16 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] grid grid-cols-1 lg:grid-cols-2">
+    <div className="min-h-[calc(100vh-64px)] grid grid-cols-1 md:grid-cols-2">
       {/* Left illustration */}
-      <div className="hidden lg:flex bg-gradient-to-br from-primary to-blue-700 flex-col items-center justify-center p-12 text-white">
+      <div className="hidden md:flex flex-col items-center justify-center p-12 text-white" style={{background: "linear-gradient(135deg, #1D4ED8 0%, #3B82F6 100%)"}}>
         <div className="max-w-sm text-center">
           <div className="w-20 h-20 bg-white/20 rounded-3xl flex items-center justify-center mx-auto mb-8"><Zap size={36} /></div>
           <h2 className="text-3xl font-bold mb-4">Welcome back to SkillShare</h2>
-          <p className="text-primary-100 text-lg leading-relaxed">Connect with the world's best skill providers and get your projects done faster.</p>
+          <p className="text-blue-100 text-lg leading-relaxed">Connect with the world's best skill providers and get your projects done faster.</p>
           <div className="mt-10 grid grid-cols-2 gap-4 text-center">
             {[["2,400+", "Providers"], ["18K+", "Projects"], ["4.8★", "Rating"], ["98%", "Happy"]].map(([v, l]) => (
-              <div key={l} className="bg-white/10 rounded-2xl p-4"><p className="text-2xl font-bold">{v}</p><p className="text-primary-100 text-sm">{l}</p></div>
+              <div key={l} className="bg-white/10 rounded-2xl p-4"><p className="text-2xl font-bold">{v}</p><p className="text-blue-100 text-sm">{l}</p></div>
             ))}
           </div>
         </div>

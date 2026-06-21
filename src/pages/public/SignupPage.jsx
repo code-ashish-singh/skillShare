@@ -36,12 +36,12 @@ export default function SignupPage() {
   const set = (k, v) => { setForm(p => ({...p, [k]: v})); setErrors(p => ({...p, [k]: ""})); };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] grid grid-cols-1 lg:grid-cols-2">
-      <div className="hidden lg:flex bg-gradient-to-br from-primary-700 to-primary flex-col items-center justify-center p-12 text-white">
+    <div className="min-h-[calc(100vh-64px)] grid grid-cols-1 md:grid-cols-2">
+      <div className="hidden md:flex flex-col items-center justify-center p-12 text-white" style={{background: "linear-gradient(135deg, #1D4ED8 0%, #3B82F6 100%)"}}>
         <div className="max-w-sm text-center">
           <div className="w-20 h-20 bg-white/20 rounded-3xl flex items-center justify-center mx-auto mb-8"><Zap size={36} /></div>
           <h2 className="text-3xl font-bold mb-4">Join SkillShare today</h2>
-          <p className="text-primary-100 text-lg leading-relaxed">Whether you're looking for talent or ready to share yours — you're in the right place.</p>
+          <p className="text-blue-100 text-lg leading-relaxed">Whether you're looking for talent or ready to share yours — you're in the right place.</p>
           <div className="mt-10 space-y-4">
             {["Create a free account in seconds", "Access 2,400+ skilled professionals", "Secure bookings with payment protection", "Rate and review every project"].map(t => (
               <div key={t} className="flex items-center gap-3 text-left bg-white/10 rounded-xl p-3"><div className="w-5 h-5 bg-green-400 rounded-full flex items-center justify-center flex-shrink-0"><span className="text-white text-xs font-bold">✓</span></div><p className="text-sm">{t}</p></div>
