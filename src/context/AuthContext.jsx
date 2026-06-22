@@ -8,6 +8,13 @@ const api = axios.create({
   withCredentials: true,
 });
 
+// Attach token from localStorage on every request
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("ss_token");
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,9 +24,11 @@ export function AuthProvider({ children }) {
 
   // App open hone par current user fetch karo
   useEffect(() => {
+    const token = localStorage.getItem("ss_token");
+    if (!token) { setLoading(false); return; }
     api.get("/auth/me")
       .then(res => setUser(res.data.data.user))
-      .catch(() => setUser(null))
+      .catch(() => { localStorage.removeItem("ss_token"); setUser(null); })
       .finally(() => setLoading(false));
   }, []);
 
@@ -27,6 +36,8 @@ export function AuthProvider({ children }) {
     try {
       const res = await api.post("/auth/login", { email, password });
       const userData = res.data.data.user;
+      const token = res.data.data.token;
+      if (token) localStorage.setItem("ss_token", token);
       setUser(userData);
       return { success: true, role: userData.role };
     } catch (err) {
@@ -37,7 +48,10 @@ export function AuthProvider({ children }) {
   const signup = async (data) => {
     try {
       const res = await api.post("/auth/register", data);
-      setUser(res.data.data.user);
+      const userData = res.data.data.user;
+      const token = res.data.data.token;
+      if (token) localStorage.setItem("ss_token", token);
+      setUser(userData);
       return { success: true };
     } catch (err) {
       return { success: false, message: err.response?.data?.message || "Signup failed" };
@@ -45,7 +59,8 @@ export function AuthProvider({ children }) {
   };
 
   const logout = async () => {
-    await api.post("/auth/logout");
+    try { await api.post("/auth/logout"); } catch {}
+    localStorage.removeItem("ss_token");
     setUser(null);
   };
 
